@@ -1,0 +1,634 @@
+<div id="home">
+	<!-- 布局 -->
+	<div class="outerDiv">
+		<div class="row">
+			<div class="col-sm-3">
+				<!-- 3个div -->
+				<div class="totalDiv bg-white">
+					<div class="iconDiv bg-green">
+						<i class="iconfont icon-yun"></i>
+					</div>
+					<div class="numDiv">
+						<span>99.9%</span>
+						<small>SERVER UPTIME</small>
+					</div>
+				</div>
+				<div class="totalDiv bg-white">
+					<div class="iconDiv bg-purple">
+						<i class="iconfont icon-user"></i>
+					</div>
+					<div class="numDiv">
+						<span>117K</span>
+						<small>USER TOTAL</small>
+					</div>
+				</div>
+				<div class="totalDiv bg-white">
+					<div class="iconDiv bg-blue">
+						<i class="iconfont icon-18"></i>
+					</div>
+					<div class="numDiv">
+						<span>2.470</span>
+						<small>NEW DAY PHOTOS</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="visDiv">
+					<div id="visContainer"></div>
+					<div class="numDiv">
+						<span>14.85%</span>
+						<small>More Visitors</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="uptimeDiv">
+					<div id="uptimeContainer"></div>
+					<div class="numDiv">
+						<span>14.85%</span>
+						<small>More Visitors</small>
+					</div>
+				</div>
+				<div class="salesDiv">
+					<div id="salesContainer"></div>
+					<div class="numDiv">
+						<span>14.85%</span>
+						<small>More Visitors</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="outerDiv1">
+		<div class="row">
+			<div class="col-sm-6">
+				<div id="outer_left">
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="outer_right">
+					<div id="speed"></div>
+					<div id="vu"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(function(){
+		drawVis();
+		drawUptime();
+		drawSales();
+		drawSpeed();
+		drawElevation();
+		drawVu();
+		function drawSales(){
+			var chart = Highcharts.chart('salesContainer', {
+				credits:{
+					enabled:false,
+				},
+				chart: {
+					margin : [0, 0 , 0, 100]
+				},
+				title: {
+					floating:true,
+					text: ''
+				},
+				tooltip: {
+					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: false,
+						},
+					}
+				},
+				series: [{
+					type: 'pie',
+					innerSize: '60%',
+					name: 'Sales',
+					data: [
+						['Firefox',45.0],
+						['IE',26.8],
+						['Chrome',12.8],
+						['Safari',8.5],
+						['Opera',6.2],
+						['其他',0.7]
+					]
+				}]
+			});
+		}
+		function drawUptime(){
+			var chart = Highcharts.chart('uptimeContainer', {
+				chart:{
+					margin:[0,0,0,0],
+				},
+				credits:{
+					enabled:false,
+				},
+				colors:['#862eb7'],
+				title: {
+					text: ''
+				},
+				xAxis: {
+					visible:false,
+				},
+				yAxis: {
+					visible:false,
+				},
+				series: [{
+					type: 'column',
+					colorByPoint: true,
+					data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4,148.5, 216.4, 194.1, 95.6, 54.4],
+					showInLegend: false
+				}]
+			});
+		}
+		function drawVis(){
+			// 绘制
+			var chart = Highcharts.chart('visContainer', {
+				chart:{
+					margin:[0,0,0,0],
+				},
+				credits:{
+					enabled:false,
+				},
+				colors:['#66bb0d','#cccccc'],
+				title: {
+					text: ''
+				},
+				xAxis: {
+					visible:false,
+				},
+				yAxis: {
+					visible:false,
+					title: {
+						text: ''
+					}
+				},
+				legend: {
+					floating:true,
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'top'
+				},
+				plotOptions: {
+					series: {
+						label: {
+							connectorAllowed: false
+						},
+						pointStart: 2010
+					}
+				},
+				series: [{
+					name: 'Page',
+					data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175,24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+				}, {
+					name: 'Visitors',
+					data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434,43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+				}]
+			});
+		}
+		function drawSpeed(){
+			var chart = Highcharts.chart('speed',{
+				chart:{
+					margin:[0,0,0,0],
+				},
+				credits:{
+					enabled:false,
+				},
+				chart: {
+					type: 'gauge',
+					plotBackgroundColor: null,
+					plotBackgroundImage: null,
+					plotBorderWidth: 0,
+					plotShadow: false
+				},
+				title: {
+					text: ''
+				},
+				pane: {
+					startAngle: -150,
+					endAngle: 150,
+					background: [{
+						backgroundColor: {
+							linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+							stops: [
+								[0, '#FFF'],
+								[1, '#333']
+							]
+						},
+						borderWidth: 0,
+						outerRadius: '109%'
+					}, {
+						backgroundColor: {
+							linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+							stops: [
+								[0, '#333'],
+								[1, '#FFF']
+							]
+						},
+						borderWidth: 1,
+						outerRadius: '107%'
+					}, {
+						// default background
+					}, {
+						backgroundColor: '#DDD',
+						borderWidth: 0,
+						outerRadius: '105%',
+						innerRadius: '103%'
+					}]
+				},
+				// the value axis
+				yAxis: {
+					min: 0,
+					max: 200,
+					minorTickInterval: 'auto',
+					minorTickWidth: 1,
+					minorTickLength: 10,
+					minorTickPosition: 'inside',
+					minorTickColor: '#666',
+					tickPixelInterval: 30,
+					tickWidth: 2,
+					tickPosition: 'inside',
+					tickLength: 10,
+					tickColor: '#666',
+					labels: {
+						step: 2,
+						rotation: 'auto'
+					},
+					title: {
+						text: 'km/h'
+					},
+					plotBands: [{
+						from: 0,
+						to: 120,
+						color: '#55BF3B' // green
+					}, {
+						from: 120,
+						to: 160,
+						color: '#DDDF0D' // yellow
+					}, {
+						from: 160,
+						to: 200,
+						color: '#DF5353' // red
+					}]
+				},
+				series: [{
+					name: 'Speed',
+					data: [80],
+					tooltip: {
+						valueSuffix: ' km/h'
+					}
+				}]
+			}, function (chart) {
+				if (!chart.renderer.forExport) {
+					setInterval(function () {
+						var point = chart.series[0].points[0],
+							newVal,
+							inc = Math.round((Math.random() - 0.5) * 20);
+						newVal = point.y + inc;
+						if (newVal < 0 || newVal > 200) {
+							newVal = point.y - inc;
+						}
+						point.update(newVal);
+					}, 3000);
+				}
+			});
+		}
+		function drawElevation(){
+				$(function () {
+					/**
+				     * 为了让多个图表的提示框即十字准星线能够联动，这里绑定多个图表的附件 dom 的鼠标事件进行联动
+				     */
+					$('#outer_left').bind('mousemove touchmove touchstart', function (e) {
+						var chart,
+							point,
+							i,
+							event;
+						for (i = 0; i < Highcharts.charts.length; i = i + 1) {
+							chart = Highcharts.charts[i];
+							event = chart.pointer.normalize(e.originalEvent); // Find coordinates within the chart
+							point = chart.series[0].searchPoint(event, true); // Get the hovered point
+							if (point) {
+								point.highlight(e);
+							}
+						}
+					});
+					/**
+				     * 重写内部的方法， 这里是将提示框即十字准星的隐藏函数关闭
+				     */
+					Highcharts.Pointer.prototype.reset = function () {
+						return undefined;
+					};
+					/**
+				     * 高亮当前的数据点，并设置鼠标滑动状态及绘制十字准星线
+				     */
+					Highcharts.Point.prototype.highlight = function (event) {
+						this.onMouseOver(); // 显示鼠标激活标识
+						this.series.chart.tooltip.refresh(this); // 显示提示框
+						this.series.chart.xAxis[0].drawCrosshair(event, this); // 显示十字准星线
+					};
+					/**
+				     * 同步缩放效果，即当一个图表进行了缩放效果，其他图表也进行缩放
+				     */
+					function syncExtremes(e) {
+						var thisChart = this.chart;
+						if (e.trigger !== 'syncExtremes') { 
+							Highcharts.each(Highcharts.charts, function (chart) {
+								if (chart !== thisChart) {
+									if (chart.xAxis[0].setExtremes) { 
+										chart.xAxis[0].setExtremes(e.min, e.max, undefined, false, { trigger: 'syncExtremes' });
+									}
+								}
+							});
+						}
+					}
+					// 获取 JSON 数据，数据文件地址：
+					//https://github.com/highcharts/highcharts/blob/master/samples/data/activity.json
+					$.getJSON('https://data.jianshukeji.com/jsonp?filename=json/activity.json&callback=?', function (activity) {
+						$.each(activity.datasets, function (i, dataset) {
+							// 添加 X 数据
+							dataset.data = Highcharts.map(dataset.data, function (val, j) {
+								return [activity.xData[j], val];
+							});
+							$('<div class="chart">')
+								.appendTo('#outer_left')
+								.highcharts({
+								chart: {
+									marginLeft: 40, // Keep all charts left aligned
+									spacingTop: 20,
+									spacingBottom: 20,
+									zoomType: 'x'
+								},
+								title: {
+									text: dataset.name,
+									align: 'left',
+									margin: 0,
+									x: 30
+								},
+								credits: {
+									enabled: false
+								},
+								legend: {
+									enabled: false
+								},
+								xAxis: {
+									crosshair: true,
+									events: {
+										setExtremes: syncExtremes
+									},
+									labels: {
+										format: '{value} km'
+									}
+								},
+								yAxis: {
+									title: {
+										text: null
+									}
+								},
+								tooltip: {
+									positioner: function () {
+										return {
+											x: this.chart.chartWidth - this.label.width, // right aligned
+											y: -1 // align to title
+										};
+									},
+									borderWidth: 0,
+									backgroundColor: 'none',
+									pointFormat: '{point.y}',
+									headerFormat: '',
+									shadow: false,
+									style: {
+										fontSize: '18px'
+									},
+									valueDecimals: dataset.valueDecimals
+								},
+								series: [{
+									data: dataset.data,
+									name: dataset.name,
+									type: dataset.type,
+									color: Highcharts.getOptions().colors[i],
+									fillOpacity: 0.3,
+									tooltip: {
+										valueSuffix: ' ' + dataset.unit
+									}
+								}]
+							});
+						});
+					});
+				});
+
+		}	
+		function drawVu(){
+			var chart = Highcharts.chart('vu',{
+				chart: {
+					type: 'gauge',
+					plotBorderWidth: 1,
+					plotBackgroundColor: {
+						linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+						stops: [
+							[0, '#FFF4C6'],
+							[0.3, '#FFFFFF'],
+							[1, '#FFF4C6']
+						]
+					},
+					plotBackgroundImage: null,
+					height: 143
+				},
+				title: {
+					text: ''
+				},
+				credits:{
+					enabled:false,
+				},
+				pane: [{
+					startAngle: -45,
+					endAngle: 45,
+					background: null,
+					center: ['25%', '145%'],
+					size: 300
+				}, {
+					startAngle: -45,
+					endAngle: 45,
+					background: null,
+					center: ['75%', '145%'],
+					size: 300
+				}],
+				yAxis: [{
+					min: -20,
+					max: 6,
+					minorTickPosition: 'outside',
+					tickPosition: 'outside',
+					labels: {
+						rotation: 'auto',
+						distance: 20
+					},
+					plotBands: [{
+						from: 0,
+						to: 6,
+						color: '#C02316',
+						innerRadius: '100%',
+						outerRadius: '105%'
+					}],
+					pane: 0,
+					title: {
+						text: 'VU<br/><span style="font-size:8px">Channel A</span>',
+						y: -40
+					}
+				}, {
+					min: -20,
+					max: 6,
+					minorTickPosition: 'outside',
+					tickPosition: 'outside',
+					labels: {
+						rotation: 'auto',
+						distance: 20
+					},
+					plotBands: [{
+						from: 0,
+						to: 6,
+						color: '#C02316',
+						innerRadius: '100%',
+						outerRadius: '105%'
+					}],
+					pane: 1,
+					title: {
+						text: 'VU<br/><span style="font-size:8px">Channel B</span>',
+						y: -40
+					}
+				}],
+				plotOptions: {
+					gauge: {
+						dataLabels: {
+							enabled: false
+						},
+						dial: {
+							radius: '100%'
+						}
+					}
+				},
+				series: [{
+					data: [-20],
+					yAxis: 0
+				}, {
+					data: [-20],
+					yAxis: 1
+				}]
+			}, function (chart) {
+				setInterval(function () {
+					if (chart.series) { // the chart may be destroyed
+						var left = chart.series[0].points[0],
+							right = chart.series[1].points[0],
+							leftVal,
+							rightVal,
+							inc = (Math.random() - 0.5) * 3;
+						leftVal =  left.y + inc;
+						rightVal = leftVal + inc / 3;
+						if (leftVal < -20 || leftVal > 6) {
+							leftVal = left.y - inc;
+						}
+						if (rightVal < -20 || rightVal > 6) {
+							rightVal = leftVal;
+						}
+						left.update(leftVal, false);
+						right.update(rightVal, false);
+						chart.redraw();
+					}
+				}, 500);
+			});
+			
+		}	
+	});
+</script>
+<style>
+	#home{
+
+	}
+	.bg-white{
+		background-color: white;
+	}
+	.bg-green{
+		background-color:#66bb0d;
+	}
+	.bg-purple{
+		background-color:#7c2fc1;
+	}
+	.bg-blue{
+		background-color: #37bbe9;
+	}
+	.outerDiv,.outerDiv1{
+		width: 95%;
+		margin:0 auto;
+	}
+	.totalDiv{
+		overflow:hidden;
+		padding: 10px;
+		border-radius: 5px;
+		margin-top:10px;
+	}
+	.totalDiv .iconDiv,.totalDiv .numDiv{
+		float:left; 
+	}
+	.iconDiv{
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		text-align: center;
+	}
+	.iconDiv i{
+		line-height: 50px;
+		color:white;
+		font-size: 35px;
+	}
+	.totalDiv .numDiv{
+		margin-left: 20px;
+		padding-top:5px;
+	}
+	.numDiv span{
+		font-size: 24px;
+		line-height: 24px;
+	}
+	.numDiv small{
+		display: block;
+	}
+	#visContainer{
+		height: 230px;
+		margin-top: 10px;
+	}
+	.visDiv,.uptimeDiv,.salesDiv{
+		position: relative;
+	}
+	.visDiv .numDiv,.uptimeDiv .numDiv,.salesDiv .numDiv{
+		position: absolute;
+		top:20px;
+		left: 20px;
+	}
+	.visDiv span{
+		color:#66bb0d;
+	}
+	.uptimeDiv,.salesDiv{
+		margin-top: 10px;
+	}
+	#uptimeContainer,#salesContainer{
+		height: 110px;
+	}
+	#outer_left,.outer_right{
+		margin: 20px 0 100px;
+		height: 410px;
+	}
+	#outer_left{
+		overflow-y: auto;
+	}
+	#speed{
+		height: 248px;
+	}
+	#vu{
+		margin-top: 19px;
+		height: 143px;
+	}
+</style>
+
